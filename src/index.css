@@ -1,0 +1,319 @@
+/* ============================================
+   GLOBAL RESET
+   ============================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Stop iOS from inflating text when the phone is rotated to landscape */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100vh;
+  font-family: var(--font-family);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition:
+    background-color var(--transition-normal),
+    color var(--transition-normal);
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+ul,
+ol {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+/* ============================================
+   LIGHT MODE (DEFAULT)
+   ============================================ */
+
+:root {
+  /* ------------------------------------------
+     Brand Colors
+     ------------------------------------------ */
+
+  --color-primary: #01704d;
+  --color-primary-light: #e4f2ec;
+  --color-primary-dark: #015236;
+
+  /* Brand green used as a FILL behind white text (buttons, badges).
+     --color-primary is the accent used for text, borders and icons.
+     They are the same in light mode; dark mode needs two different greens. */
+  --color-primary-solid: var(--color-primary);
+
+  /* ------------------------------------------
+     Notice / Information
+     ------------------------------------------ */
+
+  --color-notice: #42526e;
+  --color-notice-bg: #eaecf1;
+
+  /* ------------------------------------------
+     Backgrounds
+     ------------------------------------------ */
+
+  --bg-primary: #f4f5f7;
+  --bg-surface: #ffffff;
+
+  /* Modals, dropdowns and other floating panels */
+  --bg-elevated: var(--bg-surface);
+
+  /* ------------------------------------------
+     Text
+     ------------------------------------------ */
+
+  --text-primary: #1a1a1a;
+  --text-secondary: #5a5f66;
+  --text-on-primary: #ffffff;
+
+  /* ------------------------------------------
+     Borders / Dividers
+     ------------------------------------------ */
+
+  --border-color: #e2e4e8;
+
+  /* ------------------------------------------
+     Status Colors
+     ------------------------------------------ */
+
+  --color-success: #01704d;
+  --color-warning: #b58a00;
+  --color-danger: #b3261e;
+
+  /* Destructive FILL behind white text, and the soft error-message background */
+  --color-danger-solid: var(--color-danger);
+  --color-danger-bg: #fbeae9;
+
+  /* ------------------------------------------
+     CGPA Classification Colors
+     ------------------------------------------ */
+
+  --color-cgpa-first: #01704d;
+  --color-cgpa-second-upper: #0f766e;
+  --color-cgpa-second-lower: #b58a00;
+  --color-cgpa-third: #d97706;
+  --color-cgpa-pass: #b58a00;
+  --color-cgpa-fail: #b3261e;
+
+  /* ------------------------------------------
+     Typography
+     ------------------------------------------ */
+
+  --font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif;
+
+  /* ------------------------------------------
+     Spacing
+     ------------------------------------------ */
+
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+
+  /* ------------------------------------------
+     Border Radius
+     ------------------------------------------ */
+
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 1rem;
+
+  /* ------------------------------------------
+     Shadows
+     ------------------------------------------ */
+
+  --shadow-card: 0 1px 3px rgb(0 0 0 / 8%);
+  --shadow-elevated: 0 4px 12px rgb(0 0 0 / 12%);
+
+  /* ------------------------------------------
+     Animation
+     ------------------------------------------ */
+
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+}
+
+/* ============================================
+   DARK MODE
+   ============================================ */
+
+/* Depth hierarchy:
+   page (--bg-primary) < card (--bg-surface) < modal/dropdown (--bg-elevated)
+   Borders stay subtle; elevation comes from the lighter surface + shadow.
+   The FUTO green is kept as the identity: a lighter tint of it for text,
+   borders and icons (--color-primary) and a deeper shade for filled buttons
+   (--color-primary-solid) so white button text stays readable. */
+
+[data-theme="dark"] {
+  color-scheme: dark; /* native form controls, scrollbars, select menus */
+
+  /* Brand */
+  --color-primary: #34b382;
+  --color-primary-light: #14352a;
+  --color-primary-dark: #0a6a48;
+  --color-primary-solid: #0e7c56;
+
+  /* Notice */
+  --color-notice: #9db0cc;
+  --color-notice-bg: #262d3b;
+
+  /* Surfaces */
+  --bg-primary: #111417;
+  --bg-surface: #1a1e23;
+  --bg-elevated: #232830;
+
+  /* Text */
+  --text-primary: #e9ecef;
+  --text-secondary: #a0a7b0;
+  --text-on-primary: #ffffff;
+
+  /* Borders */
+  --border-color: #2e343c;
+
+  /* Status */
+  --color-success: #34b382;
+  --color-warning: #d9ae3f;
+  --color-danger: #f0857d;
+  --color-danger-solid: #c0392b;
+  --color-danger-bg: #3a1f1e;
+
+  /* CGPA classification (lighter tints so they read on dark surfaces) */
+  --color-cgpa-first: #34b382;
+  --color-cgpa-second-upper: #3bb5a8;
+  --color-cgpa-second-lower: #d9ae3f;
+  --color-cgpa-third: #ee9a45;
+  --color-cgpa-pass: #d9ae3f;
+  --color-cgpa-fail: #f0857d;
+
+  /* Shadows */
+  --shadow-card: 0 1px 3px rgb(0 0 0 / 40%);
+  --shadow-elevated: 0 8px 24px rgb(0 0 0 / 55%);
+}
+
+/* Dark-only refinements for native/browser-drawn parts */
+
+[data-theme="dark"] input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.75;
+}
+
+/* Stop Chrome/Safari autofill from painting fields pale yellow/white */
+[data-theme="dark"] input:-webkit-autofill,
+[data-theme="dark"] input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--text-primary);
+  caret-color: var(--text-primary);
+  box-shadow: 0 0 0 100rem var(--bg-primary) inset;
+}
+
+/* ============================================
+   APP LAYOUT
+   ============================================ */
+
+.app {
+  min-height: 100vh;
+  background-color: var(--bg-primary);
+}
+
+.main-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.auth-page {
+  min-height: calc(100vh - 5rem);
+  display: grid;
+  place-items: center;
+  padding: 2rem 1rem;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    padding: var(--space-md);
+    gap: var(--space-md);
+  }
+}
+
+/* ============================================
+   RIPPLE + PRESS BUTTON EFFECT
+   ============================================ */
+
+.ripple-button {
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--transition-fast);
+}
+
+.ripple-button:active {
+  transform: scale(0.97);
+}
+
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgb(255 255 255 / 50%);
+  transform: scale(0);
+  animation: ripple-effect 500ms ease-out;
+  pointer-events: none;
+}
+
+.ripple-button--dark .ripple {
+  background-color: rgb(1 112 77 / 15%);
+}
+
+[data-theme="dark"] .ripple-button--dark .ripple {
+  background-color: rgb(52 179 130 / 22%);
+}
+
+@keyframes ripple-effect {
+  to {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}

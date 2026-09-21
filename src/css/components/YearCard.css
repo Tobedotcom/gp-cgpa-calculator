@@ -1,0 +1,165 @@
+.year-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-lg);
+}
+
+.year-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  cursor: pointer;
+}
+
+.year-card__eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: 2px;
+}
+
+.year-card__header h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.year-card__cgpa {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.year-card__cgpa span {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.year-card__cgpa strong {
+  font-size: 1.3rem;
+  color: var(--color-primary);
+}
+
+.year-card__toggle {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: var(--space-xs);
+  transition: transform var(--transition-fast);
+}
+
+.year-card__toggle--open {
+  transform: rotate(180deg);
+  color: var(--color-primary);
+}
+
+.year-card__semesters {
+  display: none;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--border-color);
+}
+
+.year-card__semesters--open {
+  display: flex;
+}
+
+/* ===== Responsive ===== */
+
+@media (max-width: 768px) {
+  .year-card {
+    padding: var(--space-md);
+  }
+
+  .year-card__header {
+    flex-wrap: wrap;
+  }
+
+  .year-card__header h3 {
+    font-size: 1.1rem;
+  }
+}
+
+
+.year-card__delete {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  padding: 0.4rem;
+  border: none;
+  background: transparent;
+  color: var(--color-danger);
+  font-size: 1rem;
+  cursor: pointer;
+
+  transition: var(--transition-fast);
+}
+
+.year-card:hover .year-card__delete {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.year-card__delete:hover {
+  transform: scale(1.1);
+}
+
+/* ===== Touch / small screens =====
+   These must stay BELOW the base .year-card__delete rule so they win.
+   There is no hover on touch, so the delete × is always shown (kept subtle). */
+
+@media (max-width: 768px), (hover: none) {
+  .year-card__delete {
+    opacity: 0.7;
+    visibility: visible;
+    pointer-events: auto;
+    padding: 0.5rem 0.6rem;
+  }
+
+  .year-card__delete:active {
+    opacity: 1;
+  }
+}
+
+/* Comfortable tap size for the year controls on touch devices */
+@media (pointer: coarse) {
+  .year-card__delete,
+  .year-card__toggle {
+    min-width: 2.25rem;
+    min-height: 2.5rem;
+  }
+
+  .year-card__delete {
+    font-size: 1.25rem;
+    line-height: 1;
+  }
+}
+
+@media (max-width: 30rem) {
+  .year-card {
+    padding: 0.75rem;
+  }
+
+  /* Keep title, CGPA, delete and expand on one line; the title may wrap
+     rather than pushing the expand button onto its own row */
+  .year-card__header {
+    flex-wrap: nowrap;
+    gap: var(--space-sm);
+  }
+
+  .year-card__header > div:first-child {
+    min-width: 0;
+  }
+}

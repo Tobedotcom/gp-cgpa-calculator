@@ -1,0 +1,271 @@
+.auth-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-elevated);
+  padding: var(--space-xl);
+  max-width: 420px;
+  width: 100%;
+}
+
+.auth-card__eyebrow {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--color-primary);
+  background-color: var(--color-primary-light);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: 999px;
+  margin-bottom: var(--space-md);
+}
+
+.auth-card__title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xs);
+}
+
+.auth-card__description {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: var(--space-lg);
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.auth-message {
+  font-size: 0.85rem;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-sm);
+}
+
+.auth-message--error {
+  background-color: var(--color-danger-bg);
+  color: var(--color-danger);
+}
+
+.auth-message--success {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.auth-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.auth-field__label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.auth-field__label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.auth-field__password-toggle {
+  background: none;
+  border: none;
+  font-size: 0.8rem;
+  color: var(--color-primary);
+  cursor: pointer;
+  padding: 0;
+}
+
+.auth-field__input {
+  padding: var(--space-sm);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+}
+
+.auth-field__input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.auth-field__hint {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.auth-form__submit {
+  background-color: var(--color-primary-solid);
+  color: var(--text-on-primary);
+  border: none;
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.auth-form__submit:hover:not(:disabled) {
+  background-color: var(--color-primary-dark);
+}
+
+.auth-form__submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.auth-card__footer {
+  margin-top: var(--space-lg);
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.auth-card__switch {
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* EMAIL VERIFICATION */
+
+.auth-card__content {
+  width: 100%;
+}
+
+.auth-card__eyebrow {
+  display: block;
+  margin-bottom: 0.5rem;
+
+  color: var(--color-primary);
+
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.auth-card__description {
+  margin: 0.75rem 0 0;
+
+  color: var(--text-secondary);
+
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.auth-card__email {
+  margin: 0.75rem 0 0;
+
+  color: var(--text-primary);
+
+  font-size: 1rem;
+  font-weight: 700;
+
+  overflow-wrap: anywhere;
+}
+
+.auth-card__content .auth-form__submit {
+  display: block;
+  width: fit-content;
+  margin: 1.5rem auto 0;
+}
+
+.auth-card__notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+
+  margin-top: 1.5rem;
+  padding: 1rem;
+
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+
+  background: var(--color-primary-light);
+}
+
+.auth-card__notice-icon {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+
+  width: 1.5rem;
+  height: 1.5rem;
+
+  border-radius: 50%;
+
+  background: var(--color-primary-solid);
+  color: var(--text-on-primary);
+
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.auth-card__notice p {
+  margin: 0;
+
+  color: var(--text-primary);
+
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 40rem) {
+  .auth-card__notice {
+    padding: 0.875rem;
+  }
+
+  .auth-card__description {
+    font-size: 0.9rem;
+  }
+}
+
+/* ===== Responsive ===== */
+
+/* Long server/validation messages wrap instead of overflowing the card */
+.auth-message {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 30rem) {
+  .auth-card {
+    padding: var(--space-lg);
+  }
+}
+
+/* Touch devices: 16px fields so iOS does not zoom the page on focus,
+   comfortable tap heights, and larger hit areas for the small text buttons.
+   The negative margins cancel the added padding, so the layout is unchanged;
+   Show/Hide only grows upward so it never overlaps the input below it. */
+@media (pointer: coarse) {
+  .auth-field__input {
+    font-size: 1rem;
+    min-height: 2.75rem;
+  }
+
+  .auth-form__submit {
+    min-height: 2.75rem;
+  }
+
+  .auth-field__password-toggle {
+    padding: 0.875rem 0 0.25rem;
+    margin: -0.875rem 0 -0.25rem;
+  }
+
+  .auth-card__switch {
+    padding: 0.75rem 0;
+    margin: -0.75rem 0;
+  }
+}

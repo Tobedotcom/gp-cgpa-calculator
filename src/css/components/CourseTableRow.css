@@ -1,0 +1,68 @@
+/* First column stays left-aligned/bold; rest center-aligned.
+   Uses *:first-child (not nth-child) so this still applies
+   whether the cell is rendering a <span> or an <input>. */
+.course-table__row > *:first-child {
+  font-weight: 700;
+  color: var(--text-primary);
+  text-align: left;
+  /* Long course names/codes wrap inside their column instead of
+     spilling over the Units and Grade columns. Only takes effect when
+     a word would otherwise overflow. */
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.course-table__row > *:not(:first-child):not(.course-table__delete) {
+  text-align: center;
+}
+
+.course-table__editable {
+  display: inline-block;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+}
+
+.course-table__editable:hover {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.course-table__row input,
+.course-table__row select {
+  width: 100%;
+  padding: 4px 6px;
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+}
+
+/* Dark theme: these inline editors have no colours of their own, so give
+   them the same field surface as the other inputs */
+[data-theme="dark"] .course-table__row input,
+[data-theme="dark"] .course-table__row select {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+/* Narrow Units/Grade columns on phones: trim the select padding so the
+   value and the dropdown arrow both fit */
+@media (max-width: 30rem) {
+  .course-table__row select {
+    padding-inline: 2px;
+  }
+}
+
+/* Touch devices: bigger tap area for the tap-to-edit cells, and 16px
+   inputs so iOS does not zoom the page when one is focused */
+@media (pointer: coarse) {
+  .course-table__editable {
+    padding: 0.5rem 0.375rem;
+  }
+
+  .course-table__row input,
+  .course-table__row select {
+    font-size: 1rem;
+    min-height: 2.25rem;
+  }
+}

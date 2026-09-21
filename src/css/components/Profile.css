@@ -1,0 +1,250 @@
+/* ===== Profile Modal ===== */
+
+.profile-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: var(--space-lg);
+
+  background-color: rgba(0, 0, 0, 0.45);
+}
+
+.profile-modal__content {
+  position: relative;
+
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  max-height: 90dvh;
+
+  overflow-y: auto;
+
+  background-color: var(--bg-elevated);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-elevated);
+
+  padding: var(--space-lg);
+}
+
+.profile-modal__close {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+
+  width: 32px;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: 50%;
+
+  background-color: var(--bg-primary);
+  color: var(--text-secondary);
+
+  font-size: 1.25rem;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.profile-modal__close:hover {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+/* ===== Profile Card ===== */
+
+.profile-card {
+  width: 100%;
+}
+
+.profile-card__title {
+  margin-bottom: var(--space-lg);
+
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* ===== Profile Form ===== */
+
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.profile-field {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.profile-field__label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.profile-field__input {
+  width: 100%;
+
+  padding: var(--space-sm);
+
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+
+  font-size: 0.9rem;
+}
+
+.profile-field__input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.profile-field__input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ===== Combobox ===== */
+
+.profile-field__combobox {
+  position: relative;
+}
+
+.profile-field__options {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 10;
+
+  max-height: 220px;
+  overflow-y: auto;
+
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-elevated);
+}
+
+.profile-field__option {
+  display: block;
+
+  width: 100%;
+  padding: var(--space-sm);
+
+  border: none;
+  background: none;
+
+  color: var(--text-primary);
+
+  font-size: 0.9rem;
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.profile-field__option:hover {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.profile-field__empty {
+  padding: var(--space-sm);
+
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+/* ===== Submit ===== */
+
+.profile-form__submit {
+  padding: var(--space-sm) var(--space-md);
+
+  border: none;
+  border-radius: var(--radius-md);
+
+  background-color: var(--color-primary-solid);
+  color: var(--text-on-primary);
+
+  font-size: 0.95rem;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: background-color var(--transition-fast);
+}
+
+.profile-form__submit:hover {
+  background-color: var(--color-primary-dark);
+}
+
+/* ===== Feedback ===== */
+
+.profile-message {
+  margin-top: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+
+  border-radius: var(--radius-sm);
+
+  background-color: var(--color-notice-bg);
+  color: var(--color-notice);
+
+  font-size: 0.85rem;
+}
+
+/* ===== Responsive ===== */
+
+/* Long messages / department names wrap instead of overflowing */
+.profile-message,
+.profile-field__option {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 30rem) {
+  .profile-modal {
+    padding: var(--space-sm);
+  }
+
+  .profile-modal__content {
+    padding: var(--space-md);
+  }
+}
+
+/* Touch devices: 16px fields so iOS does not zoom the page on focus,
+   comfortable tap heights, and a larger close button */
+@media (pointer: coarse) {
+  .profile-field__input {
+    font-size: 1rem;
+    min-height: 2.75rem;
+  }
+
+  .profile-field__option,
+  .profile-form__submit {
+    min-height: 2.75rem;
+  }
+
+  .profile-modal__close {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}

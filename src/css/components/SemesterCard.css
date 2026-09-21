@@ -1,0 +1,161 @@
+.semester-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.semester-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  cursor: pointer;
+}
+
+.semester-card__label {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
+  margin-bottom: 2px;
+}
+
+.semester-card__header h4 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.semester-card__summary {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.semester-card__summary > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.semester-card__summary span {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+}
+
+.semester-card__summary strong {
+  font-size: 1rem;
+  color: var(--color-primary);
+}
+
+.semester-card__toggle {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: var(--space-xs);
+  transition: transform var(--transition-fast);
+}
+
+.semester-card__toggle--open {
+  transform: rotate(180deg);
+  color: var(--color-primary);
+}
+
+
+.semester-card__content {
+  display: none;
+  padding: 0 var(--space-md) var(--space-md);
+}
+
+.semester-card__content--open {
+  display: block;
+}
+
+
+.semester-card__delete {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  padding: 0.4rem;
+  border: none;
+  background: transparent;
+  color: var(--color-danger);
+  font-size: 1rem;
+  cursor: pointer;
+
+  transition: var(--transition-fast);
+}
+
+.semester-card:hover .semester-card__delete {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.semester-card__delete:hover {
+  transform: scale(1.1);
+}
+
+/* ===== Responsive ===== */
+
+@media (max-width: 768px) {
+  .semester-card__header {
+    flex-wrap: wrap;
+  }
+
+  .semester-card__summary {
+    gap: var(--space-md);
+  }
+}
+
+/* No hover on touch (this also covers tablets/landscape phones wider than
+   768px), so the delete × is always shown, kept subtle. */
+@media (max-width: 768px), (hover: none) {
+  .semester-card__delete {
+    opacity: 0.7;
+    visibility: visible;
+    pointer-events: auto;
+    padding: 0.5rem 0.6rem;
+  }
+
+  .semester-card__delete:active {
+    opacity: 1;
+  }
+}
+
+/* Comfortable tap size for the semester controls on touch devices */
+@media (pointer: coarse) {
+  .semester-card__delete,
+  .semester-card__toggle {
+    min-width: 2.25rem;
+    min-height: 2.5rem;
+  }
+
+  .semester-card__delete {
+    font-size: 1.25rem;
+    line-height: 1;
+  }
+}
+
+/* When the header wraps on phones, keep the stats on the left and the
+   controls together on the right */
+@media (max-width: 30rem) {
+  .semester-card__header {
+    gap: var(--space-sm);
+  }
+
+  .semester-card__summary {
+    margin-right: auto;
+  }
+
+  .semester-card__content {
+    padding: 0 var(--space-sm) var(--space-sm);
+  }
+}

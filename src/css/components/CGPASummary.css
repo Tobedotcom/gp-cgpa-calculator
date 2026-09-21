@@ -1,0 +1,104 @@
+.cgpa-summary {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-lg);
+}
+
+.cgpa-summary__header {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.cgpa-summary__eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: var(--space-xs);
+}
+
+.cgpa-summary__header h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.cgpa-summary__scale {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+}
+
+.cgpa-summary__stats {
+  display: flex;
+  gap: var(--space-lg);
+  flex-wrap: wrap;
+  border-top: 1px solid var(--border-color);
+  padding-top: var(--space-md);
+}
+
+.cgpa-summary__stats > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cgpa-summary__stats span {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.cgpa-summary__stats strong {
+  font-size: 1.1rem;
+  color: var(--text-primary);
+}
+
+/* ===== Responsive ===== */
+
+@media (max-width: 768px) {
+  .cgpa-summary {
+    padding: var(--space-md);
+  }
+
+  .cgpa-summary__header h2 {
+    font-size: 2rem;
+  }
+
+  .cgpa-summary__stats {
+    gap: var(--space-md);
+  }
+}
+.cgpa-summary h2.cgpa--first-class,
+.cgpa-summary strong.cgpa--first-class {
+  color: var(--color-cgpa-first);
+}
+
+.cgpa-summary h2.cgpa--second-upper,
+.cgpa-summary strong.cgpa--second-upper {
+  color: var(--color-cgpa-second-upper);
+}
+
+.cgpa-summary h2.cgpa--second-lower,
+.cgpa-summary strong.cgpa--second-lower {
+  color: var(--color-cgpa-second-lower);
+}
+
+.cgpa-summary h2.cgpa--third-class,
+.cgpa-summary strong.cgpa--third-class {
+  color: var(--color-cgpa-third);
+}
+
+.cgpa-summary h2.cgpa--pass,
+.cgpa-summary strong.cgpa--pass {
+  color: var(--color-cgpa-pass);
+}
+
+.cgpa-summary h2.cgpa--fail,
+.cgpa-summary strong.cgpa--fail {
+  color: var(--color-cgpa-fail);
+}

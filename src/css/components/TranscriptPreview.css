@@ -1,0 +1,206 @@
+.transcript-preview__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-lg);
+  background-color: rgba(0, 0, 0, 0.45);
+}
+
+.transcript-preview {
+  width: 100%;
+  max-width: 850px;
+  max-height: 90vh;
+  max-height: 90dvh;
+  overflow-y: auto;
+  background-color: var(--bg-elevated);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-elevated);
+}
+
+.transcript-preview__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.transcript-preview__eyebrow {
+  margin-bottom: var(--space-xs);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--color-primary);
+}
+
+.transcript-preview__header h2 {
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.transcript-preview__close {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--bg-primary);
+  color: var(--text-secondary);
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+.transcript-preview__student {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  background-color: var(--bg-primary);
+}
+
+.transcript-preview__student div {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.transcript-preview__student span {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.transcript-preview__student strong {
+  color: var(--text-primary);
+}
+
+.transcript-preview__records {
+  padding: var(--space-lg);
+}
+
+.transcript-preview__year {
+  margin-bottom: var(--space-xl);
+}
+
+.transcript-preview__year h3 {
+  margin-bottom: var(--space-md);
+  color: var(--color-primary);
+}
+
+.transcript-preview__semester {
+  margin-bottom: var(--space-lg);
+}
+
+.transcript-preview__semester-header {
+  margin-bottom: var(--space-sm);
+}
+
+.transcript-preview__semester-header h4 {
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.transcript-preview__table-wrapper {
+  overflow-x: auto;
+}
+
+.transcript-preview__table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.transcript-preview__table th,
+.transcript-preview__table td {
+  padding: var(--space-sm);
+  border-bottom: 1px solid var(--border-color);
+  text-align: left;
+}
+
+.transcript-preview__table th {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.transcript-preview__table td {
+  color: var(--text-primary);
+}
+
+.transcript-preview__empty {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.transcript-preview__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-sm);
+  padding: var(--space-lg);
+  border-top: 1px solid var(--border-color);
+}
+
+.transcript-preview__close-button,
+.transcript-preview__download {
+  padding: var(--space-sm) var(--space-md);
+  border: none;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.transcript-preview__close-button {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.transcript-preview__download {
+  background-color: var(--color-primary-solid);
+  color: var(--text-on-primary);
+}
+
+@media (max-width: 600px) {
+  .transcript-preview__backdrop {
+    padding: var(--space-sm);
+  }
+
+  .transcript-preview__student {
+    grid-template-columns: 1fr;
+  }
+
+  .transcript-preview__header,
+  .transcript-preview__student,
+  .transcript-preview__records,
+  .transcript-preview__actions {
+    padding: var(--space-md);
+  }
+
+  /* Long course names/codes and student details wrap instead of forcing the
+     table to scroll sideways or the text to overflow */
+  .transcript-preview__table th,
+  .transcript-preview__table td,
+  .transcript-preview__student strong {
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 30rem) {
+  .transcript-preview__table th,
+  .transcript-preview__table td {
+    padding: var(--space-sm) var(--space-xs);
+  }
+}
+
+/* Touch devices: larger tap areas */
+@media (pointer: coarse) {
+  .transcript-preview__close {
+    flex-shrink: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .transcript-preview__close-button,
+  .transcript-preview__download {
+    min-height: 2.5rem;
+  }
+}

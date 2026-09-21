@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+   <link rel="icon" type="image/png" href="/logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>gp-cgpa-calculator</title>
+    <script>
+      // Apply the saved theme before first paint so a dark-mode user never
+      // sees a flash of light. Keep in sync with src/utils/theme.js.
+      try {
+        if (localStorage.getItem("theme") === "dark") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {}
+    </script>
+    <style>
+      /* Dark page colour while the stylesheet is still loading (matches --bg-primary) */
+      html[data-theme="dark"] {
+        background-color: #111417;
+        color-scheme: dark;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

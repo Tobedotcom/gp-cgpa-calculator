@@ -1,0 +1,64 @@
+.course-row {
+  display: grid;
+  grid-template-columns: 1fr 90px 100px 70px;
+  gap: var(--space-sm);
+  align-items: center;
+}
+
+.course-row input,
+.course-row select {
+  width: 100%;
+  padding: var(--space-sm);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+}
+
+.course-row input::placeholder {
+  color: var(--text-secondary);
+}
+
+.course-row input:focus,
+.course-row select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.course-row__grade-point {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+/* ===== Responsive ===== */
+
+@media (max-width: 768px) {
+  .course-row {
+    grid-template-columns: 1fr 1fr;
+    row-gap: var(--space-sm);
+  }
+
+  /* Course name gets a full row; Units and Grade sit side by side below it */
+  .course-row input {
+    grid-column: 1 / -1;
+    min-width: 0;
+  }
+
+  .course-row__grade-point {
+    grid-column: span 2;
+    text-align: left;
+  }
+}
+
+/* Touch devices: 16px fields so iOS does not zoom the page on focus,
+   and a comfortable tap height */
+@media (pointer: coarse) {
+  .course-row input,
+  .course-row select {
+    font-size: 1rem;
+    min-height: 2.75rem;
+  }
+}

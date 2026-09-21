@@ -1,0 +1,309 @@
+.account-modal__overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+  z-index: 1000;
+}
+
+.account-modal {
+  position: relative;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  background-color: var(--bg-elevated);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-elevated);
+  max-width: 780px;
+  width: 100%;
+  /* Never taller than the screen; scrolls inside if it has to
+     (e.g. phones in landscape). No effect when the content fits. */
+  max-height: calc(100vh - 2 * var(--space-md));
+  max-height: calc(100dvh - 2 * var(--space-md));
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* ===== Left preview panel ===== */
+
+.account-modal__preview {
+  background-color: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.account-modal__preview-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+}
+
+.account-modal__preview-badge {
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-primary-solid);
+  color: var(--text-on-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+.account-modal__preview-cgpa {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+}
+
+.account-modal__preview-label {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  display: block;
+  margin-bottom: var(--space-xs);
+}
+
+.account-modal__preview-cgpa-value {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-xs);
+}
+
+.account-modal__preview-cgpa-value strong {
+  font-size: 2rem;
+  color: var(--color-primary);
+}
+
+.account-modal__preview-cgpa-value span {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.account-modal__preview-stats {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.account-modal__preview-stats > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.account-modal__preview-stats span {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+}
+
+.account-modal__preview-stats strong {
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+/* ===== Right content panel ===== */
+
+.account-modal__content {
+  position: relative;
+  padding: var(--space-xl);
+}
+
+.account-modal__close {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: var(--space-xs);
+}
+
+.account-modal__close:hover {
+  color: var(--text-primary);
+}
+
+.account-modal__eyebrow {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--color-primary);
+  background-color: var(--color-primary-light);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: 999px;
+  margin-bottom: var(--space-md);
+}
+
+.account-modal__content h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.account-modal__content p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: var(--space-lg);
+}
+
+.account-modal__benefits {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-lg);
+}
+
+.account-modal__benefit {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  padding: var(--space-sm);
+  border-radius: var(--radius-md);
+  transition: background-color var(--transition-fast);
+}
+
+.account-modal__benefit:hover {
+  background-color: var(--color-primary-light);
+}
+
+.account-modal__benefit-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.account-modal__benefit strong {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.account-modal__benefit span {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.account-modal__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.account-modal__primary {
+  background-color: var(--color-primary-solid);
+  color: var(--text-on-primary);
+  border: none;
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.account-modal__primary:hover {
+  background-color: var(--color-primary-dark);
+  box-shadow: var(--shadow-elevated);
+}
+
+.account-modal__secondary {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  padding: var(--space-sm);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  text-align: center;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.account-modal__secondary:hover {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+/* ===== Responsive ===== */
+
+@media (max-width: 820px) {
+  .account-modal {
+    grid-template-columns: 220px 1fr;
+    max-width: 620px;
+  }
+}
+
+@media (max-width: 640px) {
+  .account-modal {
+    grid-template-columns: 1fr;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .account-modal__preview {
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+  }
+}
+
+/* Phones: keep the same content, just tighter, so the buttons are reachable
+   without scrolling on most screens */
+@media (max-width: 40rem) {
+  .account-modal__preview {
+    padding: var(--space-md);
+    gap: var(--space-sm);
+  }
+
+  .account-modal__preview-cgpa {
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .account-modal__preview-cgpa-value strong {
+    font-size: 1.5rem;
+  }
+
+  .account-modal__content {
+    padding: var(--space-lg) var(--space-md) var(--space-md);
+  }
+
+  .account-modal__content h2 {
+    font-size: 1.25rem;
+  }
+
+  .account-modal__content p,
+  .account-modal__benefits {
+    margin-bottom: var(--space-md);
+  }
+}
+
+/* Touch devices: comfortable tap sizes */
+@media (pointer: coarse) {
+  .account-modal__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    top: 0;
+    right: 0;
+  }
+
+  .account-modal__primary,
+  .account-modal__secondary {
+    min-height: 2.75rem;
+  }
+}
