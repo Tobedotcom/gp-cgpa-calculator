@@ -157,6 +157,14 @@
 }
 
 
+/* Positioning anchor for the onboarding hint - wraps just the profile
+   button so the hint stays pinned to it, without changing the button
+   itself or how the profile dropdown below is positioned. */
+.header__profile-anchor {
+  position: relative;
+  display: inline-flex;
+}
+
 .header__profile {
   display: flex;
   align-items: center;
@@ -190,6 +198,13 @@
   font-size: 0.75rem;
   color: var(--text-secondary);
   line-height: 1.2;
+}
+
+/* Positioning anchor for the export-transcript onboarding hint - wraps
+   just the export button, same technique as .header__profile-anchor. */
+.header__export-anchor {
+  position: relative;
+  display: inline-flex;
 }
 
 .header__export {

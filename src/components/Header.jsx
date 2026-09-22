@@ -10,6 +10,36 @@ import { createRipple } from "../utils/ripple";
 
 import { applyTheme, getCurrentTheme } from "../utils/theme";
 
+import OnboardingHint from "./OnboardingHint";
+
+// Per-user, per-hint key so each onboarding hint is remembered
+// independently for each account that logs in on this browser/device.
+const ONBOARDING_HINT_KEY_PREFIX = "cgpa-onboarding-hint-dismissed:";
+
+function isHintDismissed(hintId, userId) {
+  try {
+    return (
+      localStorage.getItem(`${ONBOARDING_HINT_KEY_PREFIX}${hintId}:${userId}`) ===
+      "true"
+    );
+  } catch {
+    // localStorage can be unavailable (e.g. blocked storage) - treat the
+    // hint as already seen rather than risk showing it on every visit.
+    return true;
+  }
+}
+
+function markHintDismissed(hintId, userId) {
+  try {
+    localStorage.setItem(
+      `${ONBOARDING_HINT_KEY_PREFIX}${hintId}:${userId}`,
+      "true"
+    );
+  } catch {
+    // Storage may be unavailable; the hint will simply show again later.
+  }
+}
+
 function Header({
   user,
   onEditProfile,
@@ -17,11 +47,14 @@ function Header({
   profileUpdated,
   onLogout,
   onLogin,
+  hasAcademicData,
 }) {
   const [profile, setProfile] = useState(null);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
   const [theme, setTheme] = useState(getCurrentTheme);
+  const [showProfileHint, setShowProfileHint] = useState(false);
+  const [showTranscriptHint, setShowTranscriptHint] = useState(false);
 
   const isDark = theme === "dark";
 
@@ -54,6 +87,47 @@ function Header({
 
     loadProfile();
   }, [user, profileUpdated]);
+
+  // Show the "complete your profile" hint the first time this user reaches
+  // the app, until they dismiss it. Guests never see it.
+  useEffect(() => {
+    if (!user) {
+      setShowProfileHint(false);
+      return;
+    }
+
+    setShowProfileHint(!isHintDismissed("profile", user.id));
+  }, [user]);
+
+  // Show the "export your transcript" hint once it's actually relevant:
+  // the user is signed in and has academic results worth exporting. It
+  // reacts to eligibility rather than latching permanently, so it hides
+  // again if there's nothing to export yet and reappears once there is -
+  // unless the user already dismissed it.
+  useEffect(() => {
+    if (!user || !hasAcademicData) {
+      setShowTranscriptHint(false);
+      return;
+    }
+
+    setShowTranscriptHint(!isHintDismissed("export-transcript", user.id));
+  }, [user, hasAcademicData]);
+
+  function dismissProfileHint() {
+    setShowProfileHint(false);
+
+    if (!user) return;
+
+    markHintDismissed("profile", user.id);
+  }
+
+  function dismissTranscriptHint() {
+    setShowTranscriptHint(false);
+
+    if (!user) return;
+
+    markHintDismissed("export-transcript", user.id);
+  }
 
   const firstLetter =
     profile?.full_name?.trim()?.charAt(0)?.toUpperCase() || "F";
@@ -147,17 +221,27 @@ function Header({
           </button>
         )}
         {user && (
-          <button
-            type="button"
-            className="header__profile"
-            onClick={() => setIsProfileOpen((current) => !current)}
-          >
-            <div className="header__avatar">{firstLetter}</div>
+          <div className="header__profile-anchor">
+            <button
+              type="button"
+              className="header__profile"
+              onClick={() => setIsProfileOpen((current) => !current)}
+            >
+              <div className="header__avatar">{firstLetter}</div>
 
-            <div className="header__profile-name">
-              {profile?.full_name || "FUTO Student"}
-            </div>
-          </button>
+              <div className="header__profile-name">
+                {profile?.full_name || "FUTO Student"}
+              </div>
+            </button>
+
+            {showProfileHint && !isProfileOpen && (
+              <OnboardingHint
+                title="Complete your profile"
+                message="Add your name, matric number, faculty and department here."
+                onDismiss={dismissProfileHint}
+              />
+            )}
+          </div>
         )}
 
         {user && isProfileOpen && (
@@ -203,13 +287,23 @@ function Header({
         )}
 
         {user && (
-          <button
-            type="button"
-            className="header__export"
-            onClick={onExportTranscript}
-          >
-            Export Transcript
-          </button>
+          <div className="header__export-anchor">
+            <button
+              type="button"
+              className="header__export"
+              onClick={onExportTranscript}
+            >
+              Export Transcript
+            </button>
+
+            {showTranscriptHint && !isProfileOpen && (
+              <OnboardingHint
+                title="Export your transcript"
+                message="Tap here to generate a PDF transcript of your academic results."
+                onDismiss={dismissTranscriptHint}
+              />
+            )}
+          </div>
         )}
       </div>
 

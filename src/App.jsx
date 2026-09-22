@@ -97,6 +97,7 @@ function App() {
         onEditProfile={() => setShowProfile(true)}
         onExportTranscript={() => setShowTranscript(true)}
         profileUpdated={profileUpdated}
+        hasAcademicData={typeof overallCGPA === "number"}
         onLogout={() => {
           setUser(null);
           setShowProfile(false);
