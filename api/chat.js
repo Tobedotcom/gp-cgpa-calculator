@@ -72,6 +72,13 @@ export default async function handler(req, res) {
 
   if (!geminiResponse.ok) {
     console.error("Gemini API error:", geminiResponse.status, data);
+
+    if (geminiResponse.status === 429) {
+      return res.status(502).json({
+        error: "GradeBot is getting a lot of requests right now. Please wait a minute and try again.",
+      });
+    }
+
     return res
       .status(502)
       .json({ error: "The AI assistant failed to respond. Please try again." });
