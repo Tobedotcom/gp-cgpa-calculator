@@ -11,7 +11,7 @@
 // No CGPA/academic context is attached yet - that's Part 3. This just
 // forwards the raw message to Gemini and returns its text reply.
 
-const GEMINI_MODEL = "gemini-2.5-flash";
+const GEMINI_MODEL = "gemini-flash-latest";
 const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
 
 export default async function handler(req, res) {

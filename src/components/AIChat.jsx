@@ -13,9 +13,8 @@ const SUGGESTIONS = [
   "Can i still make first class by graduation?",
 ];
 
-const NOT_CONNECTED_NOTICE =
-  "GradeBot is not connected yet - this is a preview of the chat interface. Real answers are coming soon.";
-const THINKING_DELAY_MS = 700;
+const FALLBACK_ERROR_NOTICE =
+  "GradeBot couldn't respond just now. Please try again in a moment.";
 
 function AIChat() {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,16 +25,7 @@ function AIChat() {
   const conversationRef = useRef(null);
   const inputRef = useRef(null);
   const toggleRef = useRef(null);
-  const thinkingTimeoutRef = useRef(null);
   const hasOpenedRef = useRef(false);
-
-  useEffect(() => {
-    return () => {
-      if (thinkingTimeoutRef.current) {
-        clearTimeout(thinkingTimeoutRef.current);
-      }
-    };
-  }, []);
 
   useEffect(() => {
     if (!conversationRef.current) return;
@@ -71,7 +61,7 @@ function AIChat() {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [isOpen]);
 
-  function sendMessage(rawText) {
+  async function sendMessage(rawText) {
     const trimmed = rawText.trim();
 
     if (!trimmed || isThinking) return;
@@ -83,13 +73,31 @@ function AIChat() {
     setInputValue("");
     setIsThinking(true);
 
-    thinkingTimeoutRef.current = setTimeout(() => {
-      setIsThinking(false);
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: trimmed }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || typeof data.reply !== "string") {
+        throw new Error(data.error || FALLBACK_ERROR_NOTICE);
+      }
+
       setMessages((current) => [
         ...current,
-        { id: generateId(), role: "notice", text: NOT_CONNECTED_NOTICE },
+        { id: generateId(), role: "assistant", text: data.reply },
       ]);
-    }, THINKING_DELAY_MS);
+    } catch {
+      setMessages((current) => [
+        ...current,
+        { id: generateId(), role: "notice", text: FALLBACK_ERROR_NOTICE },
+      ]);
+    } finally {
+      setIsThinking(false);
+    }
   }
 
   function handleSubmit(event) {
