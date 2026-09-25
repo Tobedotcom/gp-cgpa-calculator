@@ -1,7 +1,3 @@
-/* Floating AI Academic Assistant: a toggle button fixed to the corner of
-   the viewport and the chat panel it opens. Uses the app's existing color
-   / spacing / shadow tokens throughout, so light and dark mode both work
-   without any theme logic here. */
 
 .ai-chat {
   position: fixed;

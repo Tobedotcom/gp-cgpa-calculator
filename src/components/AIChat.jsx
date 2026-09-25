@@ -8,16 +8,13 @@ import { createRipple } from "../utils/ripple";
 import ChatMessage from "./ChatMessage";
 
 const SUGGESTIONS = [
-  "What's my CGPA?",
   "How is my GP calculated?",
-  "Explain my academic record",
+  "What are my best and worst semesters?",
+  "Can i still make first class by graduation?",
 ];
 
-// Part 1 has no backend yet, so every send resolves to this honest notice
-// instead of a fake AI reply. Part 2 replaces this timeout with a real
-// request and streams the assistant's actual response into its place.
 const NOT_CONNECTED_NOTICE =
-  "The AI Academic Assistant isn't connected yet - this is a preview of the chat interface. Real answers are coming soon.";
+  "GradeBot is not connected yet - this is a preview of the chat interface. Real answers are coming soon.";
 const THINKING_DELAY_MS = 700;
 
 function AIChat() {
@@ -50,24 +47,16 @@ function AIChat() {
     if (isOpen) {
       hasOpenedRef.current = true;
 
-      // Auto-focusing the input pops the on-screen keyboard immediately on
-      // touch devices, cramping the panel before the user has even seen it.
-      // Only auto-focus on fine-pointer (mouse/trackpad) devices; touch
-      // users get the keyboard only once they tap the input themselves.
       const isTouchDevice = window.matchMedia?.("(pointer: coarse)").matches;
 
       if (!isTouchDevice) {
         inputRef.current?.focus();
       }
     } else if (hasOpenedRef.current) {
-      // Return focus to the toggle after the panel closes (but not on the
-      // initial mount, when it was never open to begin with).
       toggleRef.current?.focus();
     }
   }, [isOpen]);
 
-  // Let Escape close the panel from anywhere inside it, in addition to the
-  // header close button and the floating toggle.
   useEffect(() => {
     if (!isOpen) return;
 
@@ -135,10 +124,8 @@ function AIChat() {
               </div>
 
               <div className="ai-chat__identity-text">
-                <div className="ai-chat__title">AI Academic Assistant</div>
-                <div className="ai-chat__subtitle">
-                  Your academic companion
-                </div>
+                <div className="ai-chat__title">GradeBot</div>
+                <div className="ai-chat__subtitle">Your academic companion</div>
               </div>
             </div>
 
@@ -164,12 +151,13 @@ function AIChat() {
                 </div>
 
                 <p className="ai-chat__welcome-title">
-                  Hi! I'm your AI Academic Assistant.
+                  Hi! I'm GradeBot, your AI Academic Assistant.
                 </p>
 
                 <p className="ai-chat__welcome-text">
-                  Ask me about your CGPA, GP, courses, semesters, or academic
-                  record.
+                  Ask me anything related to your grades, CGPA, GP, or courses.
+                  I can help you understand your academic record and provide
+                  insights to improve your performance.
                 </p>
 
                 <div className="ai-chat__suggestions">

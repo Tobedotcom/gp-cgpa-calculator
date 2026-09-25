@@ -1,9 +1,4 @@
-// Generates a unique ID for local (guest-mode) React state.
-//
-// crypto.randomUUID() only exists in secure contexts (HTTPS or localhost).
-// Opening the app over a plain-HTTP network URL (e.g. the Vite dev server on
-// a phone) leaves it undefined, so fall back to crypto.getRandomValues(),
-// which is available everywhere, and build a standard v4 UUID from it.
+
 export function generateId() {
   const webCrypto = globalThis.crypto;
 
