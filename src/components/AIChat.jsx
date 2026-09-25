@@ -90,10 +90,10 @@ function AIChat() {
         ...current,
         { id: generateId(), role: "assistant", text: data.reply },
       ]);
-    } catch {
+    } catch (error) {
       setMessages((current) => [
         ...current,
-        { id: generateId(), role: "notice", text: FALLBACK_ERROR_NOTICE },
+        { id: generateId(), role: "notice", text: error.message || FALLBACK_ERROR_NOTICE },
       ]);
     } finally {
       setIsThinking(false);
