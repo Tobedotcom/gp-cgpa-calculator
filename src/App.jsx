@@ -14,6 +14,7 @@ import AccountPromptModal from "./components/AccountPromptModal";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Profile from "./components/Profile";
+import AIChat from "./components/AIChat";
 
 function App() {
   // ===== State =====
@@ -167,6 +168,8 @@ function App() {
           />
         </main>
       )}
+
+      {!showAuth && <AIChat />}
 
       {showAccountPrompt && (
         <AccountPromptModal
