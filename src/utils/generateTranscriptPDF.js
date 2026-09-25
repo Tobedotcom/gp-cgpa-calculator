@@ -2,6 +2,21 @@
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
+import futoLogo from "../assets/logo.jfif";
+
+// Preloaded/decoded once at module scope (not inside generateTranscriptPDF)
+// so a click on Download never waits on an image fetch - the bundled asset
+// is already loaded well before the button can be clicked. Also avoids a
+// runtime request to a "/logo.png" path, which depends on the page's own
+// origin and isn't reliable on mobile/local-network setups.
+const logoImage = new Image();
+
+const logoReady = new Promise((resolve) => {
+  logoImage.onload = resolve;
+  logoImage.onerror = resolve;
+  logoImage.src = futoLogo;
+});
+
 export async function generateTranscriptPDF({
   transcriptData,
   profile,
@@ -12,16 +27,10 @@ export async function generateTranscriptPDF({
   // FUTO LOGO
   // =========================
 
-  const logo = new Image();
+  await logoReady;
 
-  await new Promise((resolve) => {
-    logo.onload = resolve;
-    logo.onerror = resolve;
-    logo.src = "/logo.png";
-  });
-
-  if (logo.complete && logo.naturalWidth > 0) {
-    pdf.addImage(logo, "PNG", 85, 10, 40, 40);
+  if (logoImage.complete && logoImage.naturalWidth > 0) {
+    pdf.addImage(logoImage, "JPEG", 85, 10, 40, 40);
   }
 
   // =========================
