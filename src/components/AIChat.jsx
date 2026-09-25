@@ -49,7 +49,16 @@ function AIChat() {
   useEffect(() => {
     if (isOpen) {
       hasOpenedRef.current = true;
-      inputRef.current?.focus();
+
+      // Auto-focusing the input pops the on-screen keyboard immediately on
+      // touch devices, cramping the panel before the user has even seen it.
+      // Only auto-focus on fine-pointer (mouse/trackpad) devices; touch
+      // users get the keyboard only once they tap the input themselves.
+      const isTouchDevice = window.matchMedia?.("(pointer: coarse)").matches;
+
+      if (!isTouchDevice) {
+        inputRef.current?.focus();
+      }
     } else if (hasOpenedRef.current) {
       // Return focus to the toggle after the panel closes (but not on the
       // initial mount, when it was never open to begin with).
